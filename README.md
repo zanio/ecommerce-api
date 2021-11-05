@@ -1,5 +1,5 @@
 # ecommerce-api
-![Api documentation](https://documenter.getpostman.com/view/7638519/UVC2HoyZ)
+[Api documentation](https://documenter.getpostman.com/view/7638519/UVC2HoyZ)
 
 ### hackerank code solution: 
 
