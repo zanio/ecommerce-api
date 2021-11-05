@@ -8,6 +8,9 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+const Url = require('url-parse')
+const DATABASE_URL = new Url(Env.get('DATABASE_URL'))
+
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -36,7 +39,13 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     */
     pg: {
       client: 'pg',
-      connection: {
+      connection: Env.get('NODE_ENV')=='production'?{
+        host: Env.get('DB_HOST', DATABASE_URL.host),
+        port: Env.get('DB_PORT', ''),
+        user: Env.get('DB_USER', DATABASE_URL.username),
+        password: Env.get('DB_PASSWORD', DATABASE_URL.password),
+        database: Env.get('DB_DATABASE', DATABASE_URL.pathname.substr(1))
+      }:{
         host: Env.get('PG_HOST'),
         port: Env.get('PG_PORT'),
         user: Env.get('PG_USER'),
