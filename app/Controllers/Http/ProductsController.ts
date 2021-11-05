@@ -51,7 +51,7 @@ export default class ProductsController {
     await user.related('products').save(product)
     return product
   }
-  public async show({ request, params, response }: HttpContextContract) {
+  public async show({  params, response }: HttpContextContract) {
     try {
       const product = await Product.find(params.id)
       console.log(product)
@@ -97,7 +97,7 @@ export default class ProductsController {
     }
     return // 401
   }
-  public async destroy({ auth, request, params, response }: HttpContextContract) {
+  public async destroy({ auth, params, response }: HttpContextContract) {
     const user = await auth.authenticate()
     const product = await Product.find(params.id)
     const errorMessage = `entity not found for id ${params.id}`
