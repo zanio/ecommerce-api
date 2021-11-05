@@ -69,7 +69,7 @@ export default class ProductsController {
       console.log(error)
     }
   }
-  public async update({ auth, request, params, response }: HttpContextContract) {
+  public async update({ request, params, response }: HttpContextContract) {
     const product = await Product.find(params.id)
     const productSchema = schema.create({
       title: schema.string.optional({}, [rules.minLength(3)]),

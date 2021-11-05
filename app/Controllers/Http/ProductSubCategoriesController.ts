@@ -1,16 +1,14 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import EntityNotFoundException from 'App/Exceptions/EntityNotFoundException'
 import ProductSubCategory from 'App/Models/ProductSubCategory'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-const status = 400
-const errorCode = 'E_NOT_FOUND'
+
 export default class ProductSubCategoriesController {
   public async index({}: HttpContextContract) {
     const productSubCategory = await ProductSubCategory.query()
     return productSubCategory
   }
-  public async store({ auth, request, response }: HttpContextContract) {
+  public async store({  request, }: HttpContextContract) {
     const productSchema = schema.create({
       name: schema.string({ trim: true }, [rules.required(), rules.minLength(3)]),
       productCategoryId: schema.number([
@@ -25,7 +23,7 @@ export default class ProductSubCategoriesController {
     const result = await productSubCategory.save()
     return result
   }
-  public async show({ request, params, response }: HttpContextContract) {
+  public async show({  params, response }: HttpContextContract) {
     try {
       const productSubCategory = await ProductSubCategory.find(params.id)
       const errorMessage = `entity not found for id ${params.id}`
@@ -38,7 +36,7 @@ export default class ProductSubCategoriesController {
       console.log(error)
     }
   }
-  public async update({ auth, request, params, response }: HttpContextContract) {
+  public async update({  request, params, response }: HttpContextContract) {
     const productSubCategory = await ProductSubCategory.find(params.id)
     const errorMessage = `entity not found for id ${params.id}`
     const productSchema = schema.create({
@@ -58,7 +56,7 @@ export default class ProductSubCategoriesController {
     }
     return // 401
   }
-  public async destroy({ auth, request, params, response }: HttpContextContract) {
+  public async destroy({  params, response }: HttpContextContract) {
     const productSubCategory = await ProductSubCategory.find(params.id)
     const errorMessage = `entity not found for id ${params.id}`
     if (!productSubCategory) {
