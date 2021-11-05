@@ -1,9 +1,9 @@
 export enum GenderEnum {
-    MALE = 'MALE',
-    FEMALE = 'FEMALE'
-  }
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
 
-  export enum UserTypeEnum {
-    ADMIN = 'admin',
-    CUSTOMER = 'customer'
-  }
+export enum UserTypeEnum {
+  ADMIN = 'admin',
+  CUSTOMER = 'customer',
+}

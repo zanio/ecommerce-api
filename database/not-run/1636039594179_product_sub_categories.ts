@@ -3,7 +3,7 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class ProductSubCategories extends BaseSchema {
   protected tableName = 'product_sub_categories'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('product_category_id').unsigned().references('id').inTable('product_categories')
@@ -13,7 +13,7 @@ export default class ProductSubCategories extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }

@@ -15,7 +15,7 @@ export default class ProductSubCategory extends BaseModel {
   @column()
   public product_category_id: number
 
-  @hasOne(() => ProductCategory,{ localKey: 'product_category_id', foreignKey: 'id' })
+  @hasOne(() => ProductCategory, { localKey: 'product_category_id', foreignKey: 'id' })
   public productCategory: HasOne<typeof ProductCategory>
 
   @column.dateTime({ autoCreate: true })

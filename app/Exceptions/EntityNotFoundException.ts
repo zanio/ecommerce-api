@@ -14,9 +14,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 |
 */
 export default class EntityNotFoundException extends Exception {
-    public async handle(error: this, ctx: HttpContextContract) {
-
-      ctx.response.header("content-type","application/json; charset=utf-8")
-      ctx.response.status(error.status).json({message: error.message,status:error.status})
-    }
+  public async handle(error: this, ctx: HttpContextContract) {
+    ctx.response.header('content-type', 'application/json; charset=utf-8')
+    ctx.response.status(error.status).json({ message: error.message, status: error.status })
   }
+}

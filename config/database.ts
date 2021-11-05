@@ -11,7 +11,6 @@ import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 const Url = require('url-parse')
 const DATABASE_URL = new Url(Env.get('DATABASE_URL'))
 
-
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
   |--------------------------------------------------------------------------
@@ -39,23 +38,25 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     */
     pg: {
       client: 'pg',
-      connection: Env.get('NODE_ENV')=='production'?{
-        host: Env.get('DB_HOST', DATABASE_URL.host),
-        port: Env.get('DB_PORT', ''),
-        user: Env.get('DB_USER', DATABASE_URL.username),
-        password: Env.get('DB_PASSWORD', DATABASE_URL.password),
-        database: Env.get('DB_DATABASE', DATABASE_URL.pathname.substr(1))
-      }:{
-        host: Env.get('PG_HOST'),
-        port: Env.get('PG_PORT'),
-        user: Env.get('PG_USER'),
-        password: Env.get('PG_PASSWORD', ''),
-        database: Env.get('PG_DB_NAME'),
-      },
+      connection:
+        Env.get('NODE_ENV') === 'production'
+          ? {
+              host: Env.get('DB_HOST', DATABASE_URL.host),
+              port: Env.get('DB_PORT', ''),
+              user: Env.get('DB_USER', DATABASE_URL.username),
+              password: Env.get('DB_PASSWORD', DATABASE_URL.password),
+              database: Env.get('DB_DATABASE', DATABASE_URL.pathname.substr(1)),
+            }
+          : {
+              host: Env.get('PG_HOST'),
+              port: Env.get('PG_PORT'),
+              user: Env.get('PG_USER'),
+              password: Env.get('PG_PASSWORD', ''),
+              database: Env.get('PG_DB_NAME'),
+            },
       healthCheck: false,
-			debug: false,
+      debug: false,
     },
-
   },
 
   /*
@@ -70,8 +71,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   | - Or define a custom function to compute the primary key for a given model.
   |
   */
-  orm: {
-  },
+  orm: {},
 }
 
 export default databaseConfig

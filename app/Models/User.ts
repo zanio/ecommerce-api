@@ -1,12 +1,6 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import {
-  column,
-  beforeSave,
-  BaseModel,
-  hasMany,
-  HasMany,
-} from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import { GenderEnum, UserTypeEnum } from 'Contracts/Enum'
 import Product from './Product'
 
@@ -33,7 +27,7 @@ export default class User extends BaseModel {
   public address: string
 
   @column()
-  public gender: GenderEnum|null
+  public gender: GenderEnum | null
 
   @column()
   public type: UserTypeEnum
@@ -41,8 +35,8 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password: string
 
-  @hasMany(() => Product,{ localKey: 'id', foreignKey: 'user_id' })
-  public products: HasMany<typeof Product>;
+  @hasMany(() => Product, { localKey: 'id', foreignKey: 'user_id' })
+  public products: HasMany<typeof Product>
 
   @column()
   public rememberMeToken?: string
@@ -54,7 +48,7 @@ export default class User extends BaseModel {
   public updatedAt: DateTime
 
   @beforeSave()
-  public static async hashPassword (user: User) {
+  public static async hashPassword(user: User) {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }

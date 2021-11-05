@@ -26,13 +26,13 @@ export default class Product extends BaseModel {
   @column()
   public product_sub_category_id: number
 
-  @belongsTo(() => User,{ localKey: 'user_id', foreignKey: 'id' })
+  @belongsTo(() => User, { localKey: 'user_id', foreignKey: 'id' })
   public creator: BelongsTo<typeof User>
 
-  @hasOne(() => ProductCategory,{ localKey: 'product_category_id', foreignKey: 'id' })
+  @hasOne(() => ProductCategory, { localKey: 'product_category_id', foreignKey: 'id' })
   public productCategory: HasOne<typeof ProductCategory>
 
-  @hasOne(() => ProductSubCategory,{ localKey: 'product_sub_category_id', foreignKey: 'id' })
+  @hasOne(() => ProductSubCategory, { localKey: 'product_sub_category_id', foreignKey: 'id' })
   public productSubCategory: HasOne<typeof ProductSubCategory>
 
   @column.dateTime({ autoCreate: true })
