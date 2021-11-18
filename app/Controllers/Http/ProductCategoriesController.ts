@@ -1,7 +1,7 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ProductCategory from 'App/Models/ProductCategory'
+import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import ProductCategory from "App/Models/ProductCategory";
 
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { rules, schema } from "@ioc:Adonis/Core/Validator";
 
 export default class ProductCategoriesController {
   public async index({}: HttpContextContract) {
@@ -15,8 +15,7 @@ export default class ProductCategoriesController {
     const payload = await request.validate({ schema: productSchema })
     const productCategory = new ProductCategory()
     productCategory.name = payload.name
-    const result = await productCategory.save()
-    return result
+    return await productCategory.save()
   }
   public async show({ params, response }: HttpContextContract) {
     try {
